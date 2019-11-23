@@ -21,7 +21,6 @@ print("""
 import random
 game=['rock','paper','scissors','lizard','spock']
 
-computer = random.choice(game)
 
 C_score = 0
 P_score = 0
@@ -29,6 +28,7 @@ P_score = 0
 for x in range (10):
    round = print(f'Round {x+1}')
    player = input("What is your choice - Rock, Paper, Scissors, Lizard, or Spock? \n").lower()
+   computer = random.choice(game)
 
    if computer == 'rock':
 
