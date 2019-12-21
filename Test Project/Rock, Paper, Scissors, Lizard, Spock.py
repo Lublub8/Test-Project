@@ -16,8 +16,6 @@ print("""
       Rock crushes scissors.
        """)
 
-
-
 import random
 game=['rock','paper','scissors','lizard','spock']
 
@@ -145,4 +143,51 @@ if P_score == C_score:
 elif P_score > C_score:
     print ("Congrats! You Won!!!")
 elif P_score < C_score:
-    print ("You Lost! Restart the Game to Try Again!")
+    print ("You Lost!")
+
+import csv
+import os.path
+
+print('Leaderboard -- Rock, Paper, Scissors, Lizard, Spock')
+print("-" * 30)
+
+fieldnames = ['Name', 'Computer_Score', 'High_Score']
+
+with open("leaderboard.csv", 'r') as csvfile:
+    csvReader = csv.DictReader(csvfile, delimiter=',', fieldnames=fieldnames)
+
+    leaderboard = list(csvReader)
+
+    for info in leaderboard:
+        print(f'''{info["Name"]:15}
+        {info["Computer_Score"]:25} {info["High_Score"]}''')
+
+selection = int(input('''
+  Enter Option Number
+  --------------------
+  1. Add Player to Leaderboard
+  2. View Leaderboard
+  3. Search for Player
+  4. Exit Program
+  '''))
+
+if selection == 1:
+    name = input('Name of Player:')
+    computer = int(input('Computer Score:'))
+    player = int(input('Player Score:'))
+    save_file(fieldnames, filename)
+    view_file(fieldnames, filename)
+
+elif selection == 2:
+    view_file(fieldnames, filename)
+elif selection == 3:
+    search_info = input("Search Leaderboard for: ").title()
+
+    if search_info in open('leaderboard.csv').read():
+        print(f"Yes, {search_info} is in the list")
+    else:
+        print(f"No, {search_info} is not in the list")
+    save_file(fieldnames, filename)
+    view_file(fieldnames, filename)
+elif selection == 4:
+    exit()
